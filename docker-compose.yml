@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    container_name: "author_db"
+    env_file: .env
+    ports:
+      - 5433:5432
+    volumes:
+      - database-data:/var/lib/postgresql
+
+  api:
+    build: .
+    env_file: .env
+    container_name: "author_api"
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+
+volumes:
+  database-data:
