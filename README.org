@@ -1,0 +1,66 @@
+#+TITLE: exp-book
+#+AUTHOR: dfirebird
+#+STARTUP: overview
+
+REST API for retrieving information author and books (retrieved from goodreads).
+
+* Endpoints
++ =GET /authors= - retrieve paginated list of information about authors
+
+** GET /authors
+Returns a paginated list of information about authors.
+*** Query Parameters:
++ =page= - number of page you want to retrieve (default: 1)
++ =limit= - number of items in a single page (default: 10)
+
+*** Response structure:
+#+BEGIN_SRC json
+[
+  {
+    "id": <id>,
+    "name": <author_name>,
+  }
+  ...
+]
+#+END_SRC
+
+* Deployment
+Create a .env file with the following information:
+#+BEGIN_SRC 
+POSTGRES_USER=<postrgres_username>
+POSTGRES_PASSWORD=<postrgres_password>
+POSTGRES_DB=<postgres_db_name>
+#+END_SRC
+
+** Docker-Based
+*** Prerequisite
++ Docker
++ docker-compose
+
+Run the docker-compose to start the API server.
+
+#+BEGIN_SRC bash
+$ docker-compose up
+#+END_SRC
+
+** Local Deployment (Without Docker)
+*** Prerequisite
++ postgres
++ node version > 12
++ yarn
+
+Install the node dependencies 
+#+BEGIN_SRC bash
+$ yarn
+#+END_SRC
+
+Ensure that you have postrgres installed and it's running on your system
+then start the server.
+#+BEGIN_SRC bash
+$ yarn start
+#+END_SRC
+
+** Usage
+Navigate to =localhost:8080= and access the endpoints
+* License
+This project uses a MIT License, which can be viewed here [[file:LICENSE][here]].
