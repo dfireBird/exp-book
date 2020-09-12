@@ -8,8 +8,9 @@
     "removeComments": false,
 
     "strict": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": true,
+    "strictPropertyInitialization": false,
 
     "noFallthroughCasesInSwitch": true,
 
@@ -17,6 +18,9 @@
 
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
 }
