@@ -1,5 +1,5 @@
 {
-  "name": "author-api",
+  "name": "exp-book",
   "version": "1.0.0",
   "description": "API created for DSC task",
   "main": "dist/index.js",
