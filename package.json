@@ -13,6 +13,7 @@
     "format": "prettier --write src/**"
   },
   "dependencies": {
+    "csv-parse": "^4.12.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pg": "^8.3.3",
@@ -20,6 +21,7 @@
     "typeorm": "^0.2.26"
   },
   "devDependencies": {
+    "@types/csv-parse": "^1.2.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.8",
     "@types/node": "^14.10.0",
