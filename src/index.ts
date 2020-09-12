@@ -1,12 +1,19 @@
 import "dotenv/config";
-import express from "express";
+import "reflect-metadata";
+import { createConnection } from "typeorm";
+import express, { json } from "express";
 
-const app = express();
+createConnection()
+    .then(async (connection) => {
+        const app = express();
+        app.use(json());
 
-app.get("/", (req, res) => {
-    res.send("Hello World");
-});
+        app.get("/", (req, res) => {
+            res.send(req.body);
+        });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is listening on ${process.env.PORT}`);
-});
+        app.listen(process.env.PORT || 8080);
+
+        console.log(`Server has started on port ${process.env.PORT || 8080}`);
+    })
+    .catch((error) => console.log(error));
