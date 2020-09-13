@@ -19,4 +19,10 @@ export const BookRoutes = [
         controller: BookController,
         action: "remove",
     },
+    {
+        method: "put",
+        route: "/books/:id",
+        controller: BookController,
+        actions: "update",
+    },
 ];

@@ -57,4 +57,30 @@ export class BookController {
             return response.send("Provided id not found");
         }
     }
+
+    async update(request: Request, response: Response, next: NextFunction) {
+        const bookToUpdate = await this.bookRepository.findOne(
+            request.params.id
+        );
+
+        if (bookToUpdate === undefined) {
+            response.status(404);
+            return response.send("Provided id not found");
+        }
+
+        if (typeof request.body.name === "string") {
+            bookToUpdate.name = request.body.name;
+        }
+        if (typeof request.body.publication_year === "number") {
+            bookToUpdate.publication_year = request.body.publication_year;
+        }
+        if (typeof request.body.edition === "string") {
+            bookToUpdate.edition = request.body.edition;
+        }
+        if (Array.isArray(request.body.authors)) {
+            bookToUpdate.authors = request.body.authors;
+        }
+
+        return this.bookRepository.save(bookToUpdate);
+    }
 }
