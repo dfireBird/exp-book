@@ -4,7 +4,7 @@ import { createConnection } from "typeorm";
 import express, { json } from "express";
 
 import { AuthorRoutes } from "./routes/AuthorRoutes";
-import { Author } from "./entity/Author";
+import { BookRoutes } from "./routes/BookRoutes";
 
 createConnection()
     .then(async (connection) => {
@@ -32,6 +32,7 @@ createConnection()
         };
 
         AuthorRoutes.forEach(registerRoutes);
+        BookRoutes.forEach(registerRoutes);
 
         app.listen(process.env.PORT || 8080);
 
