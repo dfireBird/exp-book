@@ -53,6 +53,7 @@ export class BookController {
             await this.bookRepository.remove(bookToRemove);
             return bookToRemove;
         } else {
+            response.status(404);
             return response.send("Provided id not found");
         }
     }
