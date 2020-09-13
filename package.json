@@ -10,6 +10,7 @@
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/index.ts",
+    "import": "ts-node src/bin/csv_to_data.ts",
     "format": "prettier --write src/**"
   },
   "dependencies": {
