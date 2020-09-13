@@ -35,6 +35,10 @@ createConnection()
         AuthorRoutes.forEach(registerRoutes);
         BookRoutes.forEach(registerRoutes);
 
+        app.get("*", (req, res) => {
+            res.status(404).send();
+        });
+
         app.listen(process.env.PORT || 8080);
 
         console.log(`Server has started on port ${process.env.PORT || 8080}`);
