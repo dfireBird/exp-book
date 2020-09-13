@@ -10,6 +10,7 @@ createConnection()
     .then(async (connection) => {
         const app = express();
         app.use(json());
+        app.use("/", express.static("public"));
 
         const registerRoutes = (route) => {
             (app as any)[route.method](route.route, (req, res, next) => {
