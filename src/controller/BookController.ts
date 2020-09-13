@@ -25,14 +25,13 @@ export class BookController {
         if (request.query.edition !== undefined) {
             query.edition = request.query.edition as string;
         }
-        if (request.query.authors !== undefined) {
-            const query_authors = JSON.parse(request.query.authors as string);
+        if (request.query.author !== undefined) {
+            const query_author = request.query.author as string;
 
             return this.bookRepository.find({
                 ...query,
                 authors: Raw(
-                    (alias) =>
-                        `${alias} && '{${query_authors.join(",")}}'::varchar[]`
+                    (alias) => `${alias} && '{${query_author}}'::varchar[]`
                 ),
             });
         }
