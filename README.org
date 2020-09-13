@@ -4,16 +4,34 @@
 
 REST API for retrieving information author and books (retrieved from goodreads).
 
-* Endpoints
-+ =GET /authors= - retrieve paginated list of information about authors
+** Scripts
+Use the script provided in [[file:src/bin/csv_to_data.ts][ =src/bin/csv_to_data.ts= ]] to import author csv from
+data into the database, with the following format:
+#+BEGIN_SRC bash
+$ yarn run import <csv_file>
+#+END_SRC
 
-** GET /authors
+or
+
+#+BEGIN_SRC bash
+$ npx ts-node src/bin/csv_to_data.ts <csv_file>
+#+END_SRC
+
+** Endpoints
++ =GET /authors= - retrieve paginated list of information about authors
++ =POST /books= - create a book record
++ =GET /books= - retrieve book records
++ =PUT /books/:id= - update existing record of a book provided with =id=
++ =DELETE /books/:id= - delete a book record provided with =id=
+
+
+*** GET /authors
 Returns a paginated list of information about authors.
-*** Query Parameters:
+**** Query Parameters:
 + =page= - number of page you want to retrieve (default: 1)
 + =limit= - number of items in a single page (default: 10)
 
-*** Response structure:
+**** Response structure:
 #+BEGIN_SRC json
 [
   {
@@ -24,7 +42,52 @@ Returns a paginated list of information about authors.
 ]
 #+END_SRC
 
-* Deployment
+*** POST /books
+Create a record containing the information of book. 
+**** Request Body
+Send post request ot the endpoint with the following request body
+#+BEGIN_SRC json
+{
+  "name": "<name_of_the_book>",
+  "edition": "<edition_number_of_book>",
+  "publication_year": "<year_of_publication_of_book>",
+  "authors": "<array_of_author_id_from_author_endpoint>"
+}
+#+END_SRC
+*** GET /books
+Retrieve a records about book information.
+**** Query Parameters:
++ =name= - name the book (optional)
++ =publication_year= - year of publication of the book (optional)
++ =edition= - edition of the book (optional)
++ =author= - name of the author (optional)
+**** Response Structure
+#+BEGIN_SRC json
+[
+  {
+    "id": "<id>",
+    "name": "<name_of_the_book>",
+    "edition": "<edition_of_book>",
+    "authors": "<array_of_author_of_book>"
+  }
+  ...
+]
+#+END_SRC
+*** PUT /books/:id
+Update existing records of a book. Identified using =id=.
+**** Request Body
+#+BEGIN_SRC json
+{
+  "name": "<name_of_the_book_if_wanted_to_change>",
+  "edition": "<edition_of_the_book_if_wanted_to_change>",
+  "publication_year": "<publication_year_of_the_book_if_wanted_to_change>",
+  "authors": "<array_of_author_ids_if_wanted_to_change>"
+}
+#+END_SRC
+*** DELETE /book/:id
+Delete a record of a book. Identified using =id=.
+
+** Deployment
 Create a .env file with the following information:
 #+BEGIN_SRC 
 POSTGRES_USER=<postrgres_username>
@@ -62,5 +125,5 @@ $ yarn start
 
 ** Usage
 Navigate to =localhost:8080= and access the endpoints
-* License
+** License
 This project uses a MIT License, which can be viewed here [[file:LICENSE][here]].
