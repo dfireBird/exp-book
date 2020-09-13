@@ -39,4 +39,21 @@ export class BookController {
 
         return this.bookRepository.find({ ...query });
     }
+
+    async save(request: Request, response: Response, next: NextFunction) {
+        return this.bookRepository.save(request.body);
+    }
+
+    async remove(request: Request, response: Response, next: NextFunction) {
+        const bookToRemove = await this.bookRepository.findOne(
+            request.params.id
+        );
+
+        if (bookToRemove !== undefined) {
+            await this.bookRepository.remove(bookToRemove);
+            return bookToRemove;
+        } else {
+            return response.send("Provided id not found");
+        }
+    }
 }
