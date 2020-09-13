@@ -25,7 +25,7 @@ $ npx ts-node src/bin/csv_to_data.ts <csv_file>
 + =DELETE /books/:id= - delete a book record provided with =id=
 
 
-*** GET /authors
+*** GET =/authors=
 Returns a paginated list of information about authors.
 **** Query Parameters:
 + =page= - number of page you want to retrieve (default: 1)
@@ -42,7 +42,7 @@ Returns a paginated list of information about authors.
 ]
 #+END_SRC
 
-*** POST /books
+*** POST =/books=
 Create a record containing the information of book. 
 **** Request Body
 Send post request ot the endpoint with the following request body
@@ -54,7 +54,7 @@ Send post request ot the endpoint with the following request body
   "authors": "<array_of_author_id_from_author_endpoint>"
 }
 #+END_SRC
-*** GET /books
+*** GET =/books=
 Retrieve a records about book information.
 **** Query Parameters:
 + =name= - name the book (optional)
@@ -73,7 +73,7 @@ Retrieve a records about book information.
   ...
 ]
 #+END_SRC
-*** PUT /books/:id
+*** PUT =/books/:id=
 Update existing records of a book. Identified using =id=.
 **** Request Body
 #+BEGIN_SRC json
@@ -84,7 +84,7 @@ Update existing records of a book. Identified using =id=.
   "authors": "<array_of_author_ids_if_wanted_to_change>"
 }
 #+END_SRC
-*** DELETE /book/:id
+*** DELETE =/book/:id=
 Delete a record of a book. Identified using =id=.
 
 ** Deployment
@@ -95,7 +95,7 @@ POSTGRES_PASSWORD=<postrgres_password>
 POSTGRES_DB=<postgres_db_name>
 #+END_SRC
 
-** Docker-Based
+*** Docker-Based
 *** Prerequisite
 + Docker
 + docker-compose
@@ -106,7 +106,7 @@ Run the docker-compose to start the API server.
 $ docker-compose up
 #+END_SRC
 
-** Local Deployment (Without Docker)
+*** Local Deployment (Without Docker)
 *** Prerequisite
 + postgres
 + node version > 12
