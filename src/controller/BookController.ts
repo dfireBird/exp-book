@@ -1,6 +1,7 @@
 import { getRepository, Raw } from "typeorm";
 import { Request, Response, NextFunction } from "express";
 import { Book } from "../entity/Book";
+import { Author } from "../entity/Author";
 
 interface IBookQueryParameter {
     name: string;
@@ -40,7 +41,21 @@ export class BookController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.bookRepository.save(request.body);
+        let authors: string[] = [];
+        for (const author_id of request.body.authors) {
+            const author = await getRepository(Author).findOne(author_id);
+            if (author !== undefined) {
+                authors.push(author.name);
+            }
+        }
+        return this.bookRepository.save({
+            name: request.body.name,
+            edition: request.body.edition,
+            publication_year: request.body.publication_year,
+            authors: authors,
+        });
+
+        return authors;
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
